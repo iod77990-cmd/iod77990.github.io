@@ -21,5 +21,6 @@
 6. git commit -m "메시지"
 7. git push origin main
 8. push 가 안되는 경우 git pull origin main으로 병합한 후 다시 push
+9 또는 git pull --rebase origin main하고 다시 push
 
 
