@@ -52,6 +52,7 @@ SELECT REPLACE(City, 'B', 'b') FROM Customers;
 ### Suppliers에서 Country를 중복제거해서 조회하기
 SELECT DISTINCT Country FROM Suppliers; 
 ```
-[테스트 주소 링크](https://codepen.io/gykim93/pen/rNbYBQp?editors=1000)
+[문제 링크](https://codepen.io/gykim93/pen/rNbYBQp?editors=1000)
+[테스트 주소 링크](https://www.w3schools.com/mysql/trymysql.asp?filename=trysql_select_all)
 
 
