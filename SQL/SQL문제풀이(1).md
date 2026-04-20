@@ -3,9 +3,13 @@
 > SQL
 
 #### SQL 문제풀이
+- 해당 Column의 값이 NULL을 반환할 경우 다른 값으로 출력하고 싶다면 INFULL함수를 사용하면 된다.
+```sql
+SELECT IFNULL(Column명, "Null일 경우 대체 값") FROM 테이블명;
+```
 - where절에서 and는 교집합을 찾음
 
-- '%' : ~으로 시작하는 ?% 공백포함
+- '%' : ~으로 시작하는 % 문자열 사이 공백포함
 
 - 특정 소수점을 반올림을 하고 소수점 이하는 버리고 반환하는 함수 round(값, 자리수)
 
@@ -38,7 +42,7 @@ SELECT * FROM Customers WHERE City IN ('London', 'Berlin', 'Madrid');
 SELECT LastName FROM Employees WHERE LastName LIKE 'D%';
 
 ### Employees 테이블에서 LastName이 D로 시작하지 않는 행만 조회
-SELECT LastName FROM Employees WHERE NOT(LastName LIKE 'D%'); # ~으로 시작하는 ?% 공백포함
+SELECT LastName FROM Employees WHERE NOT(LastName LIKE 'D%'); 
 
 ### Products 테이블의 Price 컬럼값들을 반올림한다.
 SELECT ROUND(Price) FROM Products; 
@@ -53,6 +57,9 @@ SELECT REPLACE(City, 'B', 'b') FROM Customers;
 SELECT DISTINCT Country FROM Suppliers; 
 ```
 [문제 링크](https://codepen.io/gykim93/pen/rNbYBQp?editors=1000)
+
 [테스트 주소 링크](https://www.w3schools.com/mysql/trymysql.asp?filename=trysql_select_all)
+
+
 
 
