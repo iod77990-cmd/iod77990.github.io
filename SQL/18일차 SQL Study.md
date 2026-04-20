@@ -124,12 +124,20 @@ abs(num) : 절댓값
 
 mod(num1, num2) : 나머지 계산
 
+ceil() : 올림
+
+floor() : 버림
+
 - 날짜 및 시간 함수
 now() / sysdate() / getdate() : 현재 날짜 및 시간 변환
 
+curdate() : 연 월 초 반환
+
 date_add(date, interval) : 날짜 더하기
 
-datediff(date1, date2) : 날짜 간격 계산
+date_diff(date1, date2) : 날짜 간격 계산
+
+adddate(기준날짜, interval n day) / subdate() : 기준날짜로부터 n만큼의 간격
 
 -  형 변환 함수
 cast(value as type) : 특정 데이터 형식으로 변환
