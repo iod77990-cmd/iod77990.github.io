@@ -2,6 +2,8 @@
 
 > - SQL 주요 키워드 문법
 > - NULL 처리 방법
+> - 열 위치 변경 조건 키워드
+> - SQL 함수
 
 
 ### SQL 주요 키워드 문법
@@ -86,5 +88,54 @@ DELETE FROM 테이블명 WHERE 조건;
 ```
 
 ### NULL 처리 방법
-SQL은 테이블 생성할 때 지정하고 IS NULL, IS NOT NULL
+SQL은 테이블 생성할 때 지정하고 IS NULL, NOT NULL
+```sql
+create table a1(
+	id int not null
+);
+```
+
+### 열 위치 변경 조건 키워드
+first(맨앞으로), after(지정한 열 다음 순서로), limit(열 개수 제한) ...
+
+
+### SQL 함수
+데이터베이스에서 데이터를 조회, 조작, 분석하기 위해 미리 정의된 명령문 세트
+> 내장함수(문자열, 숫자, 날짜, 형변환, 집계) + 그룹함수(단일행, 다중행) 세트
+
+- 문자열 함수
+upper(str)/lower(str) : 대소문자 변환
+length(str)/ len(str) : 문자열 길이 반환
+substr(str, start, len)/ substring : 문자열 일부 추출 
+concat(str1, str2) : 문자열 연결
+trim(str) : 공백 제거
+
+- 숫자함수
+round(num, dec) : 소수점 반올림
+trunc(num, dec) / truncate : 특정 자리에서 버림
+abs(num) : 절댓값
+mod(num1, num2) : 나머지 계산
+
+- 날짜 및 시간 함수
+now() / sysdate() / getdate() : 현재 날짜 및 시간 변환
+date_add(date, interval) : 날짜 더하기
+datediff(date1, date2) : 날짜 간격 계산
+
+-  형 변환 함수
+cast(value as type) : 특정 데이터 형식으로 변환
+to_char(date, format) / to_date : 날짜/문자열 형식 변환
+
+- 집계함수
+sum(col) : 합계
+avg(col) : 평균
+count(col) : 행 수
+max(col) / min(col) : 최대/최솟값
+
+- null처리 및 조건 함수
+ifnull() / nvl() : null 값을 다른 값으로 대체
+case when...then...else...end : sql에서 if-else논리
+
+- 사용자 정의 함수
+...
+
 

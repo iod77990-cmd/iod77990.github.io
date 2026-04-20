@@ -17,7 +17,7 @@ SELECT IFNULL(Column명, "Null일 경우 대체 값") FROM 테이블명;
 
 - 찾아 바꾸는 함수 replace(칼럼명, 기존문자, 바꿀문자)
 
-- 중복제거 조회 distinct키워드
+- 중복제거 조회 distinct 키워드
 
 ```sql
 ### Products 테이블에서 가격(Price)으로 오름차순, 제품번호(ProductId)로 내림차순 정렬하기
