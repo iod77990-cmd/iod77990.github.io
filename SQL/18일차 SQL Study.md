@@ -105,6 +105,7 @@ first(맨앞으로), after(지정한 열 다음 순서로), limit(열 개수 제
 > 내장함수(문자열, 숫자, 날짜, 형변환, 집계) + 그룹함수(단일행, 다중행) + 사용자 정의 함수 세트
 
 - 문자열 함수
+```sql
 upper(str)/lower(str) : 대소문자 변환
 
 length(str)/ len(str) : 문자열 길이 반환
@@ -114,8 +115,10 @@ substr(str, start, len)/ substring : 문자열 일부 추출
 concat(str1, str2) : 문자열 연결
 
 trim(str) : 공백 제거
+```
 
 - 숫자함수
+```sql
 round(num, dec) : 소수점 반올림
 
 trunc(num, dec) / truncate : 특정 자리에서 버림
@@ -127,8 +130,10 @@ mod(num1, num2) : 나머지 계산
 ceil() : 올림
 
 floor() : 버림
+```
 
 - 날짜 및 시간 함수
+```sql
 now() / sysdate() / getdate() : 현재 날짜 및 시간 변환
 
 curdate() : 연 월 초 반환
@@ -138,13 +143,17 @@ date_add(date, interval) : 날짜 더하기
 date_diff(date1, date2) : 날짜 간격 계산
 
 adddate(기준날짜, interval n day) / subdate() : 기준날짜로부터 n만큼의 간격
+```
 
 -  형 변환 함수
+```sql
 cast(value as type) : 특정 데이터 형식으로 변환
 
 to_char(date, format) / to_date : 날짜/문자열 형식 변환
+```
 
 - 집계함수
+```sql
 sum(col) : 합계
 
 avg(col) : 평균
@@ -152,11 +161,14 @@ avg(col) : 평균
 count(col) : 행 수
 
 max(col) / min(col) : 최대/최솟값
+```
 
 - null처리 및 조건 함수
+```sql
 ifnull() / nvl() : null 값을 다른 값으로 대체
 
 case when...then...else...end : sql에서 if-else논리
+```
 
 - 사용자 정의 함수
 ...
