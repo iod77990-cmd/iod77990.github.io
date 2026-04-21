@@ -122,7 +122,7 @@ select * from A, B where A.id = B.id;
 ```
 이점) 
 1. 간결하다
-2. inner join만 사용하게 된다
+2. inner join만 사용하게 된다(기본값이 inner join)
 3. 가독성이 떨어진다.
 
 ---

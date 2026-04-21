@@ -360,4 +360,8 @@ SELECT e.ename, e2.ename AS '직속상사이름' FROM emp e LEFT JOIN emp e2 ON 
 #28. 이름,직속상사이름을 조회하시오.(단 직속 상사가 없는 사람도 직속상사 결과가 null값으로 나와야 함) (hint : outer join)
 ###외부OUTER 조인. A LEFT JOIN B는 조인 조건에 만족하지 못하더라도 왼쪽 테이블 A의 행을 나타내고 싶을 때 사용한다. 반대로 A RIGHT JOIN B는 조인 조건에 만족하지 못하더라도 오른쪽 테이블 B의 행을 나타내고 싶을 때
 SELECT e.ENAME AS "사원명", m.ENAME AS "상사명" FROM EMP e LEFT OUTER JOIN EMP m ON e.MGR = m.EMPNO;
+
+#29. 이름, 부서명 조회(사원 데이블에 부서번호가 40에 속한 사원은 없지만 부서번호 40인 부서명도 출력 outer join)
+SELECT * FROM dept;
+SELECT e.ename, d.dname FROM emp e RIGHT OUTER JOIN dept d ON e.deptno = d.deptno;
 ```
