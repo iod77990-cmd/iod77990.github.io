@@ -3,6 +3,7 @@
 > - SQL 집계함수 사용 위치
 > - 테이블 분리를 통해 정보간 의존도 줄이기
 > - 조인(join)
+> - 정규화
 
 
 ### SQL 집계함수 사용 위치
@@ -73,22 +74,33 @@
 
 2개의 테이블을 임의의 조건(비교연산자)으로 결합하는 조인
 
+```sql
+SELECT * FROM A, B WHERE A.value > B.value;
+```
 
 8. Equi join
 
 세타 조인 중에서 = (같다) 조건만 사용하는 경우
 
+```sql
+SELECT * FROM A, B WHERE A.id = B.id;
+```
 
 9. semi join
 
 한쪽 테이블의 행 중에서 다른 테이블에 존재한는 것만 필터링
 
+```sql
+SELECT * FROM A WHERE EXISTS ( SELECT 1 FROM B WHERE A.id = B.id );
+```
 
 10. anti join
 
 다른 테이블에 존재하지 않는 데이터만 조회
 
-
+```sql
+SELECT * FROM A WHERE NOT EXISTS ( SELECT 1 FROM B WHERE A.id = B.id );
+```
 ---
 
 - 명시적 조인(Explicit)
@@ -112,4 +124,19 @@ select * from A, B where A.id = B.id;
 1. 간결하다
 2. inner join만 사용하게 된다
 3. 가독성이 떨어진다.
+
+---
+
+### 정규화(Normalization)
+
+중복을 줄이고, 데이터의 일관성을 유지하기 위해 테이블 구조를 나누는 과정
+
+- 제 1 정규화
+
+
+- 제 2 정규화
+
+
+- 제 3 정규화
+
 
