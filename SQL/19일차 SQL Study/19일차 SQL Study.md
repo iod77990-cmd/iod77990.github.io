@@ -60,32 +60,39 @@
   - A ⋂ B (교집합)
 
 5. self join
+
 하나의 테이블을 자기 자신과 조인
 
 
 6. natural join
+
 이름이 같은 칼럼을 자동으로 기준으로 한 조인
 
 
 7. theta join
+
 2개의 테이블을 임의의 조건(비교연산자)으로 결합하는 조인
 
 
 8. Equi join
+
 세타 조인 중에서 = (같다) 조건만 사용하는 경우
 
 
 9. semi join
+
 한쪽 테이블의 행 중에서 다른 테이블에 존재한는 것만 필터링
 
 
 10. anti join
+
 다른 테이블에 존재하지 않는 데이터만 조회
 
 
 ---
 
 - 명시적 조인(Explicit)
+
 join명령어를 통해 명시적으로 table을 연결하는 방식
 ```sql
 select * from A join B on A.id = B.id;
@@ -96,6 +103,7 @@ select * from A join B on A.id = B.id;
 3. join 조건이 명확하다
 
 - 암시적 조인(Implicit)
+
 where 명령어를 통해 암시적으로 table을 연결하는 방식
 ```sql
 select * from A, B where A.id = B.id;
