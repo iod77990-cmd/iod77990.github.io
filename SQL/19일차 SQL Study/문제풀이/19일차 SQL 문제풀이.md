@@ -1,7 +1,7 @@
 오후 12:11 2026-04-21
 
 #### 전제 DB 자료 및 정보
-
+```sql
 DROP DATABASE mall;
 
 CREATE DATABASE mall;
@@ -27,9 +27,11 @@ id INT(5) PRIMARY KEY AUTO_INCREMENT,
 pname CHAR(100) NOT NULL,
 price INT(10) NOT NULL
 );
+```
 
 ---
 
+```sql
 INSERT INTO t_product
 SET pname = '운동화',
 price = 1000000;
@@ -147,12 +149,13 @@ productNo = 8;
 SELECT * FROM t_order;
 SELECT * FROM t_product;
 SELECT * FROM t_user;
+```
 
 끝
 ---
 
 문제)
-
+```sql
 #### 1. 손흥민의 주문 개수는? ???
 SELECT COUNT(*) FROM t_order LEFT JOIN t_user ON t_user.id = t_order.userNo WHERE t_user.userName = '손흥민';
 
@@ -171,11 +174,13 @@ SELECT t_user.id, t_user.userName, COUNT(t_user.userName) FROM t_order LEFT JOIN
 
 #### 5. 소지섭이 사용한 총 금액은? ???
 SELECT SUM(t_product.price) FROM t_product JOIN t_order ON t_product.id = t_order.userNo WHERE t_order.userNo = 5;
+```
 
 ---
 
 전재 DB 자료 및 정보 조건
 
+```sql
 DROP DATABASE IF EXISTS scott;
 
 CREATE DATABASE scott;
@@ -207,7 +212,8 @@ CREATE TABLE SALGRADE (
     LOSAL SMALLINT,
     HISAL SMALLINT 
 );
-
+```
+```sql
 INSERT INTO DEPT VALUES (10,'ACCOUNTING','NEW YORK');
 
 INSERT INTO DEPT VALUES (20,'RESEARCH','DALLAS');
@@ -253,12 +259,13 @@ INSERT INTO SALGRADE VALUES (3,1401,2000);
 INSERT INTO SALGRADE VALUES (4,2001,3000);
 
 INSERT INTO SALGRADE VALUES (5,3001,9999);
+```
 
 끝
 --- 
 
 문제)
-
+```sql
 #1. 사원 테이블의 모든 레코드를 조회하시오.
 SELECT * FROM emp;
 
@@ -353,4 +360,4 @@ SELECT e.ename, e2.ename AS '직속상사이름' FROM emp e LEFT JOIN emp e2 ON 
 #28. 이름,직속상사이름을 조회하시오.(단 직속 상사가 없는 사람도 직속상사 결과가 null값으로 나와야 함) (hint : outer join)
 ###외부OUTER 조인. A LEFT JOIN B는 조인 조건에 만족하지 못하더라도 왼쪽 테이블 A의 행을 나타내고 싶을 때 사용한다. 반대로 A RIGHT JOIN B는 조인 조건에 만족하지 못하더라도 오른쪽 테이블 B의 행을 나타내고 싶을 때
 SELECT e.ENAME AS "사원명", m.ENAME AS "상사명" FROM EMP e LEFT OUTER JOIN EMP m ON e.MGR = m.EMPNO;
-
+```
