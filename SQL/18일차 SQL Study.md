@@ -6,7 +6,6 @@
 > - SQL 함수
 > - SQL의 DML문 실행 순서
 
-
 ### SQL 주요 키워드 문법
 
 > DDL(Data Define Language)
