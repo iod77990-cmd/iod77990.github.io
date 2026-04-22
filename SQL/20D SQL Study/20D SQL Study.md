@@ -21,17 +21,13 @@ class(java리소스, 속성파일), 라이브러리 파일 포함, JRE만 있어
 
 #### JRE와 IDE의 차이점
 - JRE(Java Runtime Environment)
-
 자바 프로그램을 실행하기 위해 필요한 최소한의 환경
   - 구성요소
-
 JVM(Java Virtual Machine) : 자바 코드를 해석하고 실행하는 엔진
 클래스 라이브러리 : 실행 시 필요한 표준 자바 API들
 
 - IDE(Intefrated Development Environment)
-
 개발자가 소프트웨어를 효율적으로 개발할 수 있도록 돕는 통합 도구
   - 주요기능
-
 코드 편집기, 디버거, 빌드 자동화, 테스트&베포
 
