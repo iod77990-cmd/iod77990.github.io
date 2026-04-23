@@ -8,7 +8,7 @@
 ### 인텔리제이로 mysqlDB 연결 과정
 1. 인텔리제이 IDE에서 Java프로젝트를 생성 
 
-![새 프로젝트 생성 화면](./SQL/21D SQL/인텔리제이 새 프로젝트 캡쳐 2026-04-23 102336.png)
+![새 프로젝트 생성 화면](./SQL/21D SQL/IntelliJNewProjectCapture 2026-04-23 102336.png)
 
 2. maven repo에서 mysql Connect/J설치
 
@@ -20,13 +20,13 @@
 
 다운받은 mysql connetor.zip파일을 추가
 
-![파일구조](./SQL/21D SQL/인텔리제이 파일 구조 캡쳐 2026-04-23 102921.png)
+![파일구조](./SQL/21D SQL/IntelliJFileStructureCapture 2026-04-23 102921.png)
 
 4. IDE의 오른쪽 DB아이콘을 누르고 
 추가 버튼 -> 데이터 소스 -> mysql(maria DB) -> 접속중인 DB연결 참고해서
 테스트 연결 성공 하면 연결 성공
 
-![데이터베이스](./SQL/21D SQL/인텔리제이 파일 구조 캡쳐 2026-04-23 102921.png)
+![데이터베이스](./SQL/21D SQL/IntelliJDatabaseCapture 2026-04-23 103507.png)
 
 ---
 
