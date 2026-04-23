@@ -78,6 +78,10 @@ public class Main(){
 link: [google](https://google.com)
 
 ### 이미지
+
+"![ex_screenshot](./img/screenshot.png)"
+
+
 ![](https://velog.velcdn.com/images/ios77990/post/d8e7f2c2-03ac-4ac4-b002-9a02383d10c9/image.png)
 
 ![](https://velog.velcdn.com/images/ios77990/post/65fd3f8f-8599-4052-85a8-e6f52ee86aa3/image.jpg)
