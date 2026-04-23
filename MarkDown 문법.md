@@ -78,9 +78,23 @@ public class Main(){
 link: [google](https://google.com)
 
 ### 이미지
+1. images 폴더 안에 있는 screenshot.png를 불러오려면 아래와 같이 작성
 
-"![ex_screenshot](./img/screenshot.png)"
+```md
+![ex_screenshot](img/screenshot.png)
+```
 
+2. 하위 폴더의 md파일에서 불러올 때
+
+```md
+![로고](../images/logo.png)
+``
+
+3. 이미지 크기 조절이 필요하면
+
+```md
+<img src="images/screenshot.png" width="400" height="auto">
+```
 
 ![](https://velog.velcdn.com/images/ios77990/post/d8e7f2c2-03ac-4ac4-b002-9a02383d10c9/image.png)
 
