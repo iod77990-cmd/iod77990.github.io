@@ -32,6 +32,8 @@
 
 ### 게시물 Write, List(조회), Modify, Delete
 
+[해당하는 깃헙 코드](https://github.com/iod77990-cmd/ArticleManager-JDBC-/blob/main/JAVA_AM_26_04/src/main/java/org/example/Main.java)
+
 - Write(article write, 게시글 작성)
 
 ```java
