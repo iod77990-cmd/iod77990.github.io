@@ -63,7 +63,7 @@ SELECT * FROM information_schema.views WHERE table_schema = 'public';
 
 - 상태)
 
-![트랜잭션의 상태](TrensactionStatus_2026-04-24.png)
+![트랜잭션의 상태](./images/TrensactionStatus_2026-04-24.png)
 
 활성 : 트랜잭션이 정상적으로 실행 중인 상태
 
@@ -74,5 +74,4 @@ SELECT * FROM information_schema.views WHERE table_schema = 'public';
 실패 : 트랜잭션 실행에 오류가 발생하여 중단된 상태
 
 철회 : 트랜잭션이 비정상적으로 종료되어 Rollback 연산을 수행한 상태
-
 

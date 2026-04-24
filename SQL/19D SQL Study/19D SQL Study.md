@@ -5,6 +5,7 @@
 > - 조인(join)
 > - 정규화
 
+![조이고](./image/JoinSyntaxAndkindsofJoin_2026-04-21.png)
 
 ### SQL 집계함수 사용 위치
 
