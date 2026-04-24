@@ -85,10 +85,13 @@ DROP TABLE Author;
 - 외래키 설정
 
 부모)
+
+```sql
 CREATE TABLE Authors (
     author_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL
 );
+```
 
 자식)
 모든 칼럼 다 적고 맨 마지막에 제약 조건 따로 선언
