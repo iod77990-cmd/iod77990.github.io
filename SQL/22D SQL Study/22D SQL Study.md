@@ -63,7 +63,7 @@ SELECT * FROM information_schema.views WHERE table_schema = 'public';
 
 - 상태)
 
-![트랜잭션의 상태](22D SQL Study)
+![트랜잭션의 상태](TrensactionStatus_2026-04-24.png)
 
 활성 : 트랜잭션이 정상적으로 실행 중인 상태
 부분완료 : 트랜잭션이 마지막까지 실행되었지만 Commit연산이 실행되기 직전의 상태
