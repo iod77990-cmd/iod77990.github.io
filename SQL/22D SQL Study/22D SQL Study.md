@@ -66,8 +66,13 @@ SELECT * FROM information_schema.views WHERE table_schema = 'public';
 ![트랜잭션의 상태](TrensactionStatus_2026-04-24.png)
 
 활성 : 트랜잭션이 정상적으로 실행 중인 상태
+
 부분완료 : 트랜잭션이 마지막까지 실행되었지만 Commit연산이 실행되기 직전의 상태
+
 완료 : 트랜잭션이 성공 이후로 Commit 연산이 실행한 후의 상태
+
 실패 : 트랜잭션 실행에 오류가 발생하여 중단된 상태
+
 철회 : 트랜잭션이 비정상적으로 종료되어 Rollback 연산을 수행한 상태
+
 
