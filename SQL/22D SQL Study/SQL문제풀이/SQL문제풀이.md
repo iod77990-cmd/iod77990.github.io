@@ -114,3 +114,113 @@ CREATE TABLE Books (
     author_id INT REFERENCES Author(author_id), 
     price DOUBLE DEFAULT 0
 );
+
+```sql
+
+CREATE DATABASE c1;
+USE c1;
+
+# 1)
+CREATE TABLE `user` (
+    `name` VARCHAR(50) NOT NULL,
+    u_id VARCHAR(50) PRIMARY KEY NOT NULL,
+    `password` VARCHAR(50) NOT NULL,
+    nickname VARCHAR(50) NOT NULL UNIQUE,
+    jDate TEXT
+);
+
+DROP TABLE `user`;
+
+CREATE TABLE board(
+    id INT,
+    b_id INT NOT NULL,
+    opifromuser VARCHAR(50),
+    likefromuser VARCHAR(50),
+    noti TEXT ,
+    free TEXT ,
+    qna TEXT ,
+    opi VARCHAR(50) ,
+    regDate TEXT
+);
+
+CREATE TABLE article (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    b_id INT NOT NULL,
+    a_id VARCHAR(50) NOT NULL,
+    title VARCHAR(50),
+    `body` TEXT,
+    hit INT NOT NULL,
+    regDate TEXT,
+    `like` INT
+);
+
+# 2)
+# 회원가입 4명
+INSERT INTO `user` VALUES('홍길동', 'user1', '1234', '신출귀몰', '2023-01-01 00:00:00');
+INSERT INTO `user` VALUES('이순신', 'user2', '4321', '구국의영웅', '2023-01-01 00:00:00');
+INSERT INTO `user` VALUES('임꺽정', 'user3', '1423', '힘쎈장사', '2023-01-01 00:00:00');
+INSERT INTO `user` VALUES('유관순', 'user4', '3131', '독립열사', '2023-01-01 00:00:00');
+
+# 게시물 등록
+# 홍길동이 자유게시판 3개
+INSERT INTO article VALUES(1, 2, 'user1', '제목1', '내용1', 10, '2023년3월3일 12시30분',0);
+INSERT INTO article VALUES(2, 2, 'user1', '제목2', '내용2', 23, '2024년4월5일 15시12분',0);
+INSERT INTO article VALUES(3, 2, 'user1', '제목3', '내용3', 31, '2025년1월2일 19시08분',0);
+
+#이순신이 자유게시판 2개
+INSERT INTO article VALUES(4, 2, 'user2', '제목4', '내용4', 100, '2024년4월1일 08시30분',0);
+INSERT INTO article VALUES(5, 2, 'user2', '제목5', '내용5', 13, '2024년5월7일 16시22분',0);
+
+# 이순신이 공지게시판에 2개
+INSERT INTO article VALUES(6, 1, 'user2', '제목6', '내용6', 112, '2023년3월3일 12시30분',0);
+INSERT INTO article VALUES(7, 1, 'user2', '제목7', '내용7', 224, '2024년6월1일 17시12분',0);
+
+# 임꺽정이 질문과 답 2개
+INSERT INTO article VALUES(8, 3, 'user3', '제목8', '내용8', 87, '2023년7월1일 22시30분',0);
+INSERT INTO article VALUES(9, 3, 'user3', '제목9', '내용9', 56, '2025년3월3일 23시12분',0);
+
+# 이순신이 질문과 답 1개
+INSERT INTO article VALUES(10, 3, 'user2', '제목10', '내용10', 3, '2025년4월1일 20시00분',0);
+
+# 유관순이 질문과 답 1개
+INSERT INTO article VALUES(11, 3, 'user4', '제목11', '내용11', 12, '2025년3월11일 20시00분',0);
+
+#유관순이 자유게시판에 1개 
+INSERT INTO article VALUES(12, 2, 'user4', '제목12', '내용12', 32, '2025년2월13일 20시00분',0);
+
+# 임꺽정이 자유게시판 첫번째 게시물에 댓글 2개
+INSERT INTO board SET b_id = 2, id = 1, opifromuser = 'user3', free =' 제목1' , opi = '댓글내용1', regDate = '2024년4월5일 15시12분';
+INSERT INTO board SET b_id = 2, id = 1, opifromuser = 'user3', free =' 제목1' , opi = '댓글내용2', regDate = '2024년5월2일 19시08분';
+
+# 임꺽정이 질문과 답 첫번째 두번째에 각각 댓글 2개씩 작성
+INSERT INTO board SET b_id = 3, id = 8, opifromuser = 'user3', qna = '제목8', opi = '댓글내용9', regDate = '2023년7월5일 13시32분';
+INSERT INTO board SET b_id = 3, id = 8, opifromuser = 'user3', qna = '제목8', opi = '댓글내용10', regDate = '2023년7월7일 11시15분';
+INSERT INTO board SET b_id = 3, id = 9, opifromuser = 'user3', qna = '제목9', opi = '댓글내용11', regDate = '2025년6월5일 15시22분';
+INSERT INTO board SET b_id = 3, id = 9, opifromuser = 'user3', qna = '제목9', opi = '댓글내용12', regDate = '2025년7월3일 17시14분';
+
+# 이순신이 질문과 답 두번째 글에 댓글 3개 작성
+INSERT INTO board SET b_id = 3, id = 9, opifromuser = 'user2', qna = '제목9', opi = '댓글내용13', regDate = '2025년3월5일 17시02분';
+INSERT INTO board SET b_id = 3, id = 9, opifromuser = 'user2', qna = '제목9', opi = '댓글내용14', regDate = '2025년3월7일 12시32분';
+INSERT INTO board SET b_id = 3, id = 9, opifromuser = 'user2', qna = '제목9', opi = '댓글내용15', regDate = '2025년3월7일 16시15분';
+
+# 홍길동이 공지사항 첫번째, 두번째 게시물에 각각 댓글 3개씩 작성
+INSERT INTO board SET b_id = 1, id = 6, opifromuser = 'user2', noti = '제목6', opi = '댓글내용3', regDate = '2023년3월3일 12시30분';
+INSERT INTO board SET b_id = 1, id = 6, opifromuser = 'user2', noti = '제목6', opi = '댓글내용4', regDate = '2023년3월5일 15시12분';
+INSERT INTO board SET b_id = 1, id = 6, opifromuser = 'user2', noti = '제목6', opi = '댓글내용5', regDate = '2023년3월12일 19시08분';
+
+INSERT INTO board SET b_id = 1, id = 7, opifromuser = 'user2', noti = '제목7', opi = '댓글내용6', regDate = '2024년6월3일 12시30분';
+INSERT INTO board SET b_id = 1, id = 7, opifromuser = 'user2', noti = '제목7', opi = '댓글내용7', regDate = '2024년6월5일 15시12분';
+INSERT INTO board SET b_id = 1, id = 7, opifromuser = 'user2', noti = '제목7', opi = '댓글내용8', regDate = '2025년4월1일 19시08분';
+
+# 좋아요
+
+UPDATE article SET `like` = 4 WHERE title = '제목1';
+UPDATE article SET `like` = 1 WHERE title = '제목4';
+UPDATE article SET `like` = 2 WHERE title = '제목7';
+UPDATE article SET `like` = 4 WHERE title = '제목10';
+UPDATE article SET `like` = 1 WHERE title = '제목3';
+
+SELECT * FROM `user`;
+SELECT * FROM board;
+SELECT * FROM article;
+```
