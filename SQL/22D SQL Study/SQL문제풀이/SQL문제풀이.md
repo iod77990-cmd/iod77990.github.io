@@ -106,7 +106,7 @@ CREATE TABLE Books (
 또는
 
 칼럼 이름과 타입 바로 뒤에 제약 조건을 붙이는 방식
-
+```sql
 CREATE TABLE Books (
     book_id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
@@ -114,6 +114,7 @@ CREATE TABLE Books (
     author_id INT REFERENCES Author(author_id), 
     price DOUBLE DEFAULT 0
 );
+```
 
 ```sql
 
