@@ -36,22 +36,23 @@ SecSql sql = new SecSql();
 sql.append("SELECT * FROM tableName ");
 sql.append("WHERE loginId = ?", Id);
 
+// 1. DB에서 해당 아이디를 가진 '행(Row)' 하나를 통째로 가져옴
+Map<String, Object> memberRow = DBUtil.selectRow(conn, sql);
+
 ```
 
 ### DB에서 가져온 테이블 정보 입력한 값과 일치하는지 확인하기
 
 사용자에게 입력받은 정보 중에 비밀번호 일치하는지 확인
 ```sql
-// 1. DB에서 해당 아이디를 가진 '행(Row)' 하나를 통째로 가져옴
-Map<String, Object> memberRow = DBUtil.selectRow(conn, sql);
 
-// 2. [논리 1단계] 이 주머니(Map)가 비었니?
+// 1. [논리 1단계] 이 주머니(Map)가 비었을까?
 if (memberRow.isEmpty()) { 
     // 논리: 주머니가 비었다면 애초에 그런 아이디는 DB에 없다는 뜻
     return "아이디가 틀렸습니다.";
 }
 
-// 3. [논리 2단계] 주머니 안에 든 '진짜 비번'을 꺼내서 대조해봐
+// 2. [논리 2단계] 주머니 안에 든 '진짜 비번'을 꺼내서 대조해볼까?
 String dbPw = (String) memberRow.get("loginPw"); // DB에 저장된 값
 
 if (dbPw.equals(loginPw)) {
