@@ -1,0 +1,227 @@
+day02
+
+1. 집계함수
+1) count() : 행의 개수
+2) sum() : 합계
+3) avg() : 평균
+4) max(), min() : 최대, 최소값
+- 집계 함수의 결과는 행 1개가 나온다.
+- null은 포함시키지 않는다 where절에는 작성 불가
+- count(*) : null은 포함한 모든 행의 수
+- count(칼럼명) : null을 제외한 행의 개수
+
+2. 그룹연산
+1) group by 절
+- 특정 칼럼에 있는 값을 그룹으로 묶어서 데이터를 집계
+ex) 부서별 평균 급여, 팀별 평균 키,...(~별, ~마다)
+
+2) having
+- group by 로 그룹화를 하면, 묶은 그룹에 조건을 걸 때는 having 을 사용
+
+3. 내장 함수
+- sql 의 내장 함수
+- DBMS별로 차이가 있으나 거의 비슷함
+
+1) 문자 함수
+- SUBSTRING(문자, m, n) : 문자 m부터 n개 자른다
+- CONCAT(문자1, 문자2) : 문자들을 결합
+- CHAR_LENGTH(문자) : 공백 포함한 문자의 수
+
+2) 숫자 함수
+- CEIL(숫자) : 올림
+- FLOOR(숫자) : 버림
+- ROUND(숫자) : 반올림
+- TRUNCATE(숫자, m) : 소수점 m 자리에서 자르기
+
+3) 날짜 함수
+- NOW() : 오늘 날짜와 시간을 날짜 형 타입으로 반환
+- YEAR(날짜) : 날짜에서 연도 반환
+- MONTH(날짜) : 날짜에서 월만 반환
+- DATE_FROMAT(날짜, 형식) : 날짜를 지정한 형식으로 반환
+
+4. 서브쿼리
+- 다른 쿼리 내부에 포함되어 있는 쿼리문
+- 서브쿼리는 ()를 사용하여 감싼다
+- 서브쿼리의 위치에 따른 종류
+- WHERE절에 사용하는 서브쿼리
+- SELECT절에 사용하는 서브쿼리(스칼라)
+- FROM절에 사용하는 서브쿼리(인라인 뷰)
+
+- 단일 행 서브쿼리
+서브쿼리 실행결과로 반드시 1개 행 조회
+- 사용하는 연산자 : 관계(비교) 연산자 
+
+- 다중 행 서브쿼리
+서브쿼리 실행결과로 여러 개의 조건이 한번에 비교할 때 사용
+사용하는 연산자 : IN(), ANY(), ALL()
+IN(A OR B OR C OR ....)
+ALL(A, B, C) 전부 다 만족하면 반환
+--------------------------------------------------------------------
+select avg(p.HEIGHT) from PLAYER p;
+select count(p.HEIGHT) from PLAYER p; 
+
+select count(IFNULL(p.HEIGHT,0)) from PLAYER p;
+-- null 값을 0으로 치환하고 그 다음에 count
+
+-- group by
+select * FROM  player group by position;
+
+/*
+position칼럼 별로 모든 행을 조회를 한다는 것은 오류
+*/
+
+-- 집계함수와 같이 사용
+select avg(height) from PLAYER p ;
+
+-- 문제1
+select avg(HEIGHT), player_id FROM player where PLAYER_ID like '2007%' group BY position;
+
+-- 문제2
+select p.`POSITION` , avg(p.HEIGHT) from PLAYER p where p.`POSITION` = 'DF' group by p.TEAM_ID order by avg(p.HEIGHT);
+
+-- 내장함수
+-- 문자 내장 함수
+SELECT SUBSTRING('안녕하세요.', 2);
+-- 2번째 부터 자름
+
+SELECT SUBSTRING('안녕하세요.', 1, 2);
+-- 1번째 부터 2개 까지 자름
+
+SELECT CHAR_LENGTH('안녕 너의 집 ');
+
+SELECT CONCAT('A', 'B'); 
+
+SELECT NOW(), YEAR(NOW()), MONTH(NOW()), DAY(NOW()), DATE_FORMAT(NOW(), '%Y %m %d'), DATE_FORMAT(NOW(), '%Y-%m-%d');
+
+-- 1) EMPLOYEES 테이블에서 LAST_NAME이 4 글짜 이하 사원들의 사원번호, 이름, 성을 조회
+SELECT employee_id, first_name, last_name FROM employees WHERE CHAR_LENGTH(LAST_NAME) <= 4;
+
+-- 2) 
+SELECT YEAR(hire_date) AS '입사 연도', ROUND(AVG(salary), 2) AS '평균 급여' FROM employees GROUP BY hire_date ORDER BY hire_date;
+
+-- 3) 
+SELECT p.TEAM_ID, p.PLAYER_NAME FROM PLAYER p WHERE p.TEAM_ID = (SELECT p2.TEAM_ID FROM PLAYER p2 WHERE p2.PLAYER_NAME = '정남일');
+
+-- 4) 
+SELECT p.PLAYER_NAME, p.TEAM_ID, p.HEIGHT FROM PLAYER p WHERE p.HEIGHT <= (SELECT AVG(p2.HEIGHT) FROM PLAYER p2) ORDER BY P.HEIGHT DESC; 
+-- WHERE절에 집계함수 오면 안됨
+
+-- 경기 일정 테이블에서 경기 일정이 20120501 ~ 20120502 사이에 있는 경기장 전체 정보를 STADIUM 테이블에서
+-- 일정에 해당하는 경기장 정보 조회
+SELECT * FROM STADIUM s WHERE s.STADIUM_ID IN (SELECT SC.STADIUM_ID FROM SCHEDULE SC  WHERE SC.SCHE_DATE BETWEEN '20120501' AND '20120502');
+-- 서브쿼리 : 경기일정 20120501 ~ 20120502의 경기장 id조회
+-- 메인쿼리 : 경기장 테이블의 경기장ID 중 서브쿼리에서 조회된 경기장ID에 있는 경기장 조회
+
+-- 1) TEAM테이블에 지역명 이 서울이거나 수원인 팀들의 TEAM_ID 서브쿼리로 찾고 해당 팀에 소속된 선수들의 이름과 포지션을 조회
+
+SELECT PLAYER_NAME, POSITION FROM PLAYER WHERE TEAM_ID IN (SELECT TEAM_ID FROM TEAM WHERE REGION_NAME IN('서울', '수원'));
+
+-- 2) EMPLOYEES테이블에서 이름이 abel인 사원보다 급여 높은 사원들의 성, 이름 조회
+SELECT first_name, last_name, salary FROM employees WHERE salary > (SELECT salary FROM employees WHERE LAST_NAME = 'Abel');
+
+-- 3) 'K08'팀의 모든 공격수보다 키가 큰 선수 조회
+SELECT PLAYER_NAME, HEIGHT FROM PLAYER WHERE HEIGHT > ALL(SELECT P2.HEIGHT FROM PLAYER P2 WHERE P2.TEAM_ID = 'K08' AND P2.POSITION = 'FW');
+
+-- 다중 컬럼 서브쿼리
+-- 각 포지션 별로 가장 작은 키가 작은 선수들의 정보 조회, 
+# 1) 포지션 별로 가장 작은 키 조회
+SELECT POSITION, MIN(HEIGHT) FROM PLAYER WHERE POSITION IS NOT NULL GROUP BY POSITION;
+# 2) 
+SELECT * FROM PLAYER WHERE (`POSITION`, HEIGHT) IN (SELECT POSITION, MIN(HEIGHT) FROM PLAYER WHERE POSITION IS NOT NULL GROUP BY POSITION);
+
+-- 각 팀별로 최저 키를 가진 선수 조회, 각 팀ID별로 가장 작은 선수의 팀ID, 이름, 키를 조회, 단 포지션이 없는 선수는 제외
+SELECT MIN(HEIGHT), PLAYER_NAME, TEAM_ID FROM PLAYER WHERE (TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) FROM PLAYER WHERE POSITION IS NOT NULL GROUP BY TEAM_ID);
+
+-- 스칼라 서브쿼리
+-- 메인쿼리의 SELECT문에서 사용
+-- 직원이름, 급여, 전체 평균 급여 조회
+SELECT FIRST_NAME, SALARY, (SELECT ROUND(AVG(salary)) FROM employees) FROM employees;
+-- SELECT문에 사용하는 서브쿼리는 1개의 행이 나와야 함
+
+-- 인라인 뷰 서브쿼리
+-- 메인쿼리의 FROM절에 사용하는 서브쿼리(가상의 임시 테이블)
+SELECT * FROM (SELECT * FROM PLAYER WHERE TEAM_ID = 'K01') AS SUB WHERE POSITION = 'GK';
+
+-- SQL문의 종류
+# DDL : CREATE, ALTER, DROP, RENAME, TRUNCATE
+# DML : SELECT, INSERT, UPDATE, DELETE 
+# DCL : GRANT, REVOKE
+# TCL : COMMIT, ROLLBACK 
+
+-- DDL
+# 관계형 데이터베이스는 테이블에 데이터를 저장, 수정, 삭제, 이름변경
+CREATE TABLE TBL_MEMBER(
+MEMBER_NAME VARCHAR(100),
+MEMBER_AGE INT 
+);
+
+# 테이블 생성 : CREATE TABLE, 기본키, 외래키, 제약조건 설정 
+# 자료형(데이터 타입) INT 정수, DECIMAL() 소수점이 있는 숫자, VARCHAR() 최대 255까지 설정가능 가변길이 문자열, CHAR() 고정된 크기의 문자열, DATE 날짜형 타입 
+
+-- ALTER : 테이블 수정, 테이블명 수정 RENAME TO 새로운 테이블 명, 컬럼 추가 ADD 칼럼명 자료형 제약조건, 컬럼명 수정 RENAME 기존컬럼명 TO 새로운 컬럼명, 컬럼 삭제 : DROP 컬럼명, 컬럼 타입 수정 : MODIFY 컬럼명 자료형
+
+CREATE TABLE TBL_USER (`NAME` VARCHAR(100), USER_AGE INT);
+
+ALTER TABLE TBL_USER RENAME TO `USER`;
+
+ALTER TABLE `USER` ADD GENDER CHAR(4);
+SELECT * FROM `USER`;
+
+ALTER TABLE `USER` RENAME COLUMN USER_AGE TO AGE;
+
+ALTER TABLE `USER` MODIFY GENDER CHAR(5);
+
+DROP TABLE `USER`;
+
+-- DML
+# 테이블 안의 데이터를 입력하거나 수정 삭제 조회, 데이터 조작어
+INSERT INTO TBL_MEMBER (MEMBER_NAME, MEMBER_AGE) VALUES('짱구', 5);
+INSERT INTO TBL_MEMBER (MEMBER_NAME, MEMBER_AGE) VALUES('김철수', 10);
+SELECT * FROM TBL_MEMBER;
+UPDATE TBL_MEMBER SET MEMBER_NAME = "김찰스", MEMBER_AGE = 10 WHERE MEMBER_AGE = 5;
+DELETE FROM TBL_MEMBER WHERE MEMBER_NAME = "김찰스";
+TRUNCATE TABLE TBL_MEMBER;
+# DELETE : 삭제 여부만 표시(용량 초기화 안됨), TRUNCATE : 테이블의 데이터 삭제하면서 용량 초기화 까지 진행
+
+-- DCL
+
+
+-- 제약조건
+# PRIMARY KEY
+# 고유한 값이고 각 행의 구분, NULL이 들어가지 못한다
+# 외래키
+# 다른 테이블의 PK를 사용하고 중복이 가능, 테이블 간의 관계를 맺을 때 사용, NULL이 들어갈수 있음
+# NOT NULL 
+# CHECK(조건) 특정 칼럼에 특정 값만 허용하고 싶을 때 사용
+# DEFAULT 특정 칼럼에 데이터 삽입하지 않으면 기본값 
+# 복합 키 2개 이상의 칼럼을 KEY로 지정, 테이블에 1개의 PK만 존재, 복합키를 사용하면 2개 이상의 칼럼을 하나의 PK로 사용할 수 있다
+-- PK
+CREATE TABLE PRODUCT(NUMBER INT PRIMARY KEY, NAME VARCHAR(100), PRICE INT);
+CREATE TABLE PRODUCT(NUMBER INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(100), PRICE INT);
+INSERT INTO PRODUCT VALUES(1, '짱구는 못말려', 3000);
+SELECT * FROM PRODUCT;
+INSERT INTO PRODUCT(NAME, PRICE) VALUES('상처받으면 아프니까 방어에 올인합니다.', 3000);
+TRUNCATE TABLE PRODUCT;
+DROP TABLE PRODUCT;
+
+-- FK
+CREATE TABLE SCHOOL(SCHOOL_ID INT , SCHOOL_NAME VARCHAR(100), CONSTRAINT PK_SCHOOL PRIMARY KEY(SCHOOL_ID));
+-- 제약조건 이름 PK_SCHOOL : SCHOOL_ID에 PK 설정
+
+CREATE TABLE STUDENT(STUDENT_ID INT, STUDENT_NAME VARCHAR(260), STUDENT_AGE INT , SCHOOL_ID INT, CONSTRAINT PK_STUDENT PRIMARY KEY(STUDENT_ID), CONSTRAINT FK_STUDENT FOREIGN KEY(SCHOOL_ID) REFERENCES SCHOOL(SCHOOL_ID) ON DELETE CASCADE);
+# 학생이 어느학교에 다니는지 학교 테이블을 참조하도록 PK참조, 참조하고 있는 테이블의 데이터가 삭제가 되면 같이 STUDENT데이터도 삭제가 된다.
+
+INSERT INTO SCHOOL VALUES(1, '짱구가 교사인 학교');
+INSERT INTO SCHOOL VALUES(2, '물마셔 학교');
+SELECT * FROM SCHOOL;
+
+INSERT INTO STUDENT VALUES(1, '짱구', 27, 1);
+INSERT INTO STUDENT VALUES(2, '원형탈모인', 30, 2);
+INSERT INTO STUDENT VALUES(3, '찰스', 30, 5);
+SELECT * FROM STUDENT;
+# 외래키는 참조하고 있는 PK중에 없는 값을 넣을 수 없음
+
+-- FK테이블 삭제
+DROP TABLE IF EXISTS STUDENT;
+DROP TABLE IF EXISTS SCHOOL;
+
