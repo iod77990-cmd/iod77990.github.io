@@ -56,7 +56,7 @@ ex) 부서별 평균 급여, 팀별 평균 키,...(~별, ~마다)
 사용하는 연산자 : IN(), ANY(), ALL()
 IN(A OR B OR C OR ....)
 ALL(A, B, C) 전부 다 만족하면 반환
---------------------------------------------------------------------
+---
 select avg(p.HEIGHT) from PLAYER p;
 select count(p.HEIGHT) from PLAYER p; 
 
