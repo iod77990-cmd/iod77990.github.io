@@ -57,6 +57,7 @@ ex) 부서별 평균 급여, 팀별 평균 키,...(~별, ~마다)
 IN(A OR B OR C OR ....)
 ALL(A, B, C) 전부 다 만족하면 반환
 ---
+```sql
 select avg(p.HEIGHT) from PLAYER p;
 select count(p.HEIGHT) from PLAYER p; 
 
@@ -173,6 +174,7 @@ ALTER TABLE `USER` MODIFY GENDER CHAR(5);
 
 DROP TABLE `USER`;
 
+
 -- DML
 # 테이블 안의 데이터를 입력하거나 수정 삭제 조회, 데이터 조작어
 INSERT INTO TBL_MEMBER (MEMBER_NAME, MEMBER_AGE) VALUES('짱구', 5);
@@ -224,4 +226,4 @@ SELECT * FROM STUDENT;
 -- FK 테이블 삭제
 DROP TABLE IF EXISTS STUDENT;
 DROP TABLE IF EXISTS SCHOOL;
-
+```
