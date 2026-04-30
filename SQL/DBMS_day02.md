@@ -1,4 +1,3 @@
-day02
 
 1. 집계함수
 1) count() : 행의 개수
@@ -186,7 +185,9 @@ TRUNCATE TABLE TBL_MEMBER;
 # DELETE : 삭제 여부만 표시(용량 초기화 안됨), TRUNCATE : 테이블의 데이터 삭제하면서 용량 초기화 까지 진행
 
 -- DCL
+# GRANT
 
+# REVOKE
 
 -- 제약조건
 # PRIMARY KEY
