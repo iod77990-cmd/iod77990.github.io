@@ -4,7 +4,7 @@
 주로 **Java**, **SQL**, **CS 기초** 지식을 다룹니다.
 
 ## 🛠 Tech Stack
-- **Language:** Java, SQL
+- **Language:** Java, SQL, HTML, JavaScript, CSS
 - **Tools:** MacBook, iPad, Obsidian, IntelliJ IDEA 2026.1 IDE, SQLyog
 - **Platform:** GitHub Pages, Velog
 
